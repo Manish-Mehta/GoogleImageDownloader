@@ -1,0 +1,103 @@
+
+.container{ 
+	margin-left:35%;
+	margin-right:35%; 
+	margin-top:10%; 
+	background-color:AliceBlue; 
+	border: thin #d9d9d9 solid;
+	/*border-top-right-radius: 8%;           
+	border-bottom-left-radius: 10%;*/
+} 
+
+div.container{ 
+	padding:1%; 
+	padding-bottom:2%; 
+} 
+	
+
+.container h1{ 
+	padding-left: 15%; 
+} 
+
+
+.form{ 
+	padding-left:20%; 
+}
+
+
+.roundBorder{ 
+	border-radius: 0% 2%;
+	height: 15%;	
+/* */
+}
+
+.button{
+	background-color: SkyBlue;
+	color: white;
+}
+
+.searchBox {
+      border-radius:0.8em;
+      border-width:0;
+      color: white;
+      font-weight:lighter;
+      padding:0.2em 0.5em;
+      padding-right:0.1em;
+      background: white;
+      border: thin #125699 solid;	           
+}
+                
+.searchBox:hover {
+	              
+      color: black;
+      background:LightSteelBlue;	           
+}           
+
+.searchBox:focus {
+	              
+      color: black;
+      background:white;	           
+}
+
+.button {
+
+ 	position: relative;
+	text-decoration: none;
+	text-align: center;
+	color:white;
+	margin: 1% 2%;
+	padding:1% 3%;
+	border-radius: 5%;
+	background-color: #2B2553;
+	border-top-right-radius: 0.5em;           
+	border-bottom-left-radius:  0.5em;
+	border: thin #125699 solid;
+	opacity: 0.9;
+                     
+}
+
+.button:hover {
+    background-color:#403B8A;
+} 
+
+a 	{
+	text-decoration: none;
+	color: black;
+	opacity: 0.9;
+}
+
+a:hover {
+	opacity:0.4;
+}
+
+.keywordDisplayBlock{
+	margin-left:35%; 
+	margin-top:10%; 
+	width: 18%;
+	padding-left: 4%;
+	padding-bottom: 1%;
+	background-color:AliceBlue; 
+	border: thin #d9d9d9 solid;
+	/*border-top-right-radius: 8%;           
+	border-bottom-left-radius: 10%;*/
+}
