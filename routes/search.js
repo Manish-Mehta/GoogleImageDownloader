@@ -23,7 +23,14 @@ router.get('/', function (req, res) {
 
   searchKeyword = req.query.searchInput;
   console.log("search request made for "+searchKeyword);
-  response.write("your search request for "+searchKeyword+ "is processing please wait.....");
+  
+  function delayFn(arg) {
+  	response.write(arg);
+  }
+
+  setTimeout(delayFn, 10000, 'your search request for "+searchKeyword+ " is processing please wait.....<br>');
+  //setTimeout(delayFn, 50000, 'your search request for "+searchKeyword+ " is processing please wait.....<br>');
+
   
   //image scrapping
   var google = new Scraper.Google();
