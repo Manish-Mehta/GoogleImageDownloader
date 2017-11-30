@@ -3,6 +3,7 @@
 const express = require('express');
 const path = require('path');
 const mongoModule = require('./LIB/mongoModule');
+var logger = require('morgan');
 
 var search = require('./routes/search');
 var displayKeywords = require('./routes/displayKeywords');
@@ -15,6 +16,7 @@ app.set('port', (process.env.PORT || 3000));
 
 app.set('views',path.join(__dirname,'views'));	
 app.set('view engine', 'pug');
+app.use(logger('combined'));
 
 // HOME Route
 app.get('/', (req, res) => 
