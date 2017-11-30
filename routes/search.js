@@ -82,7 +82,7 @@ function imageDownload(fetchedOBJ)
 
 function afterDownloading()
 {
-	var hrefString = "<br><a href='http://localhost:3000/displayKeywords'>Click here</a> to see all the keywords"+
+	var hrefString = "<br><a href='https://google-image-downloader.herokuapp.com/displayKeywords'>Click here</a> to see all the keywords"+
 					"  Entered yet!<br>";
 	response.end("Downloading Completed"+hrefString);
 	console.log("Downloading Completed!");
