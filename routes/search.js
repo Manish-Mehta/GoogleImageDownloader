@@ -3,6 +3,7 @@ const router = express.Router();
 const Scraper = require ('images-scraper')
 const download = require('image-downloader');
 const mongo = require('../LIB/mongoModule');
+const timer = true; //for heroku
 
 let imageDownloadPath = 'Download/';
 let searchKeyword = '';
@@ -24,12 +25,18 @@ router.get('/', function (req, res) {
   searchKeyword = req.query.searchInput;
   console.log("search request made for "+searchKeyword);
   
-  function delayFn(arg) {
-  	response.write(arg);
-  }
+  if(timer)
+  	{
+  		function delayFn(arg) {
+  			response.write(arg);
+  		}
+  		function delayFn2(arg) {
+  			response.write(arg);
+  		}
 
-  setTimeout(delayFn, 10000, 'your search request for "+searchKeyword+ " is processing please wait.....<br>');
-  //setTimeout(delayFn, 50000, 'your search request for "+searchKeyword+ " is processing please wait.....<br>');
+  		setTimeout(delayFn, 10000, 'your search request for '+searchKeyword+ ' is processing please wait.....<br>');
+  		setTimeout(delayFn2, 50000, '<br> this may take a while');
+  	}
 
   
   //image scrapping
