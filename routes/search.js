@@ -23,6 +23,7 @@ router.get('/', function (req, res) {
 
   searchKeyword = req.query.searchInput;
   console.log("search request made for "+searchKeyword);
+  response.write("your search request for "+searchKeyword+ "is processing please wait.....");
   
   //image scrapping
   var google = new Scraper.Google();
