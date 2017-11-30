@@ -42,26 +42,28 @@ router.get('/', function (req, res) {
   //image scrapping
   var google = new Scraper.Google();
   
-  google.list({
-    keyword: searchKeyword,
-    num: 15,
-    detail: true,
-    nightmare: {
-        show: false
-    }
-  })
-  .then(imageDownload).catch(function(err) {
-    console.log('err', err);
-  });
-
-  
+  try
+   {
+	  	google.list({
+	    keyword: searchKeyword,
+	    num: 15,
+	    detail: true,
+	    nightmare: {
+	        show: false
+	    }
+	    })
+	    .then(imageDownload);
+	}
+	catch(err){
+		console.log(err);
+	}
 });
 
 
 //image Downloading module
 function imageDownload(fetchedOBJ)
 {
-	console.log('images scraped');
+	
 	fetchedOBJ.forEach(function(element)
 		{
 			//console.log('Image URL->'+ element.url);
