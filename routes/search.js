@@ -57,16 +57,21 @@ router.get('/', function (req, res) {
 	        show: false
 	    }
 	    })
-	    .then(imageDownload);
+	    .then(imageDownloaded, onRejected);
 	}
 	catch(err){
 		console.log(err);
 	}
 });
 
+function onRejected()
+{
+	console.log('promise rejected: images did not scrapped');
+}
+
 
 //image Downloading module
-function imageDownload(fetchedOBJ)
+function imageDownloaded(fetchedOBJ)
 {
 	
 	fetchedOBJ.forEach(function(element)
