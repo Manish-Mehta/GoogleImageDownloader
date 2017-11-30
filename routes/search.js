@@ -34,8 +34,13 @@ router.get('/', function (req, res) {
   			response.write(arg);
   		}
 
+  		function delayFn3(arg) {
+  			response.write(arg);
+  		}
+
   		setTimeout(delayFn, 10000, 'your search request for '+searchKeyword+ ' is processing please wait.....<br>');
   		setTimeout(delayFn2, 50000, '<br> this may take a while	');
+  		setTimeout(delayFn3, 103000, '<br> waiting for image information');
   	}
 
   
