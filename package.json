@@ -10,11 +10,11 @@
   "author": "Manish Mehta",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2",
-    "image-downloader": "^3.3.0",
-    "images-scraper": "^2.0.11",
-    "mongodb": "^2.2.33",
-    "nodemon": "^1.12.1",
-    "pug": "^2.0.0-rc.4"
+    "express": "4.16.2",
+    "image-downloader": "3.3.0",
+    "images-scraper": "2.0.11",
+    "mongodb": "2.2.33",
+    "nodemon": "1.12.1",
+    "pug": "2.0.0-rc.4"
   }
 }

@@ -35,7 +35,7 @@ router.get('/', function (req, res) {
   		}
 
   		setTimeout(delayFn, 10000, 'your search request for '+searchKeyword+ ' is processing please wait.....<br>');
-  		setTimeout(delayFn2, 50000, '<br> this may take a while');
+  		setTimeout(delayFn2, 50000, '<br> this may take a while	');
   	}
 
   
@@ -61,7 +61,7 @@ router.get('/', function (req, res) {
 //image Downloading module
 function imageDownload(fetchedOBJ)
 {
-	
+	console.log('images scraped');
 	fetchedOBJ.forEach(function(element)
 		{
 			//console.log('Image URL->'+ element.url);
