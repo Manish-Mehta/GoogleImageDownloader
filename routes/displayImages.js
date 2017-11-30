@@ -14,7 +14,7 @@ router.get('/', function(req,res){
     function extractData(result)
     {
        	var htmlOP = "<html><head><title>Image Display</title></head><body><br>"+
-       					"<a href='http://localhost:3000/'><< HOME"+"</a>   "+
+       					"<a href='" +__dirname+ "'><< HOME"+"</a>   "+
        					"<a href='http://localhost:3000/displayKeywords' style='margin-left:80%'>Display keywords >>"+"</a><br><br>";
        					
        	console.log("data fetched");

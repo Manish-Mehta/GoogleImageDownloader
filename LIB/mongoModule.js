@@ -1,9 +1,9 @@
 
 const MongoClient = require('../node_modules/mongodb').MongoClient;
-var dbName = 'googleImages';
+var dbName = 'googleimages';
 var collectionName = 'imageDetails';
 
-var url = "mongodb://localhost:27017/"+dbName;
+var url = "mongodb://admin:admin@ds123926.mlab.com:23926/"+dbName;
 
 
 module.exports = {
