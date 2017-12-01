@@ -5,12 +5,15 @@ const download = require('image-downloader');
 const mongo = require('../LIB/mongoModule');
 const timer = true; //for heroku
 
+
 let imageDownloadPath = 'Download/';
 let searchKeyword = '';
 let counter = 0;
 let promiseCounter = 0;
 var response;
+var request;
 var fileDetail = [];
+var serverURL;
 
 
 
@@ -20,6 +23,7 @@ router.get('/', function (req, res) {
   promiseCounter = 0;
   counter = 0;
   response = res;
+  request = req;
   response.writeHead(200, {'Content-Type' : 'text/html' });
 
   searchKeyword = req.query.searchInput;
@@ -67,6 +71,7 @@ router.get('/', function (req, res) {
 function onRejected()
 {
 	console.log('promise rejected: images did not scrapped');
+	response.end("error occurred while scrapping");
 }
 
 
@@ -109,7 +114,8 @@ function imageDownloaded(fetchedOBJ)
 
 function afterDownloading()
 {
-	var hrefString = "<br><a href='https://google-image-downloader.herokuapp.com/displayKeywords'>Click here</a> to see all the keywords"+
+	serverURL = request.protocol + '://' + request.get('host') ;
+	var hrefString = "<br><a href='"+serverURL+"/displayKeywords/'>Click here</a> to see all the keywords"+
 					"  Entered yet!<br>";
 	response.end("Downloading Completed"+hrefString);
 	console.log("Downloading Completed!");

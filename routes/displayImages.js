@@ -13,9 +13,10 @@ router.get('/', function(req,res){
     
     function extractData(result)
     {
+       	var serverURL = req.protocol + '://' + req.get('host') ;
        	var htmlOP = "<html><head><title>Image Display</title></head><body><br>"+
-       					"<a href='https://google-image-downloader.herokuapp.com/'><< HOME"+"</a>   "+
-       					"<a href='https://google-image-downloader.herokuapp.com/displayKeywords' style='margin-left:80%'>Display keywords >>"+"</a><br><br>";
+       					"<a href='"+serverURL+"/'><< HOME"+"</a>   "+
+       					"<a href='"+serverURL+"/displayKeywords/' style='margin-left:80%'>Display keywords >>"+"</a><br><br>";
        					
        	console.log("data fetched");
        	console.log(result);

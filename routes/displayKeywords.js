@@ -14,10 +14,11 @@ router.get('/', function(req,res){
     function extractData(docs)
     {
     	console.log("keywords fetched: "+docs);
-    	var htmlOP = "<link rel='stylesheet' type='text/css' href='css/style.css'><div class='keywordDisplayBlock'>";
+    	var htmlOP = "<link rel='stylesheet' type='text/css' href='../css/style.css'><div class='keywordDisplayBlock'>";
+        var serverURL = req.protocol + '://' + req.get('host') ;
     	docs.forEach(function(element)
 		{
-			htmlOP+="<br><a href='https://google-image-downloader.herokuapp.com/displayImages?imageName="+element+"' style='text-decoration:underline'>"+element+"</a>";
+			htmlOP+="<br><a href='"+serverURL+"/displayImages?imageName="+element+"' style='text-decoration:underline'>"+element+"</a>";
 			
 		});
 		res.end(htmlOP);
