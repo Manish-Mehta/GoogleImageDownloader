@@ -3,7 +3,6 @@ const router = express.Router();
 const Scraper = require ('images-scraper')
 const download = require('image-downloader');
 const mongo = require('../LIB/mongoModule');
-const timer = true; //for heroku
 
 
 let imageDownloadPath = 'Download/';
@@ -26,6 +25,8 @@ router.get('/', function (req, res) {
   responseEnded = false;
   request = req;
   response.writeHead(200, {'Content-Type' : 'text/html' });
+  response.write("<link rel='stylesheet' type='text/css' href='../css/style.css'><div class='container'>"+
+  			"<br>your search request for '+searchKeyword+ ' is processing please wait.....<br>");
 
   searchKeyword = req.query.searchInput;
   console.log("search request made for "+searchKeyword);
@@ -45,9 +46,9 @@ function delayFn3(arg) {
 		response.write(arg);
 }
 
-setTimeout(delayFn, 10000, 'your search request for '+searchKeyword+ ' is processing please wait.....<br>');
-setTimeout(delayFn2, 50000, '<br> this may take a while	<br>');
-setTimeout(delayFn3, 103000, '<br> waiting for image information<br>');
+setTimeout(delayFn, 10000, '<br> this may take a while	<br>');
+setTimeout(delayFn2, 50000, '<br> waiting for image information<br>');
+setTimeout(delayFn3, 103000, '<br>its taking longer than expected <br>');
 	
 
   
@@ -74,7 +75,7 @@ setTimeout(delayFn3, 103000, '<br> waiting for image information<br>');
 function onRejected()
 {
 	console.log('promise rejected: images did not scrapped');
-	response.end("error occurred while scrapping", endResponse);
+	response.end("error occurred while scrapping</div>", endResponse);
 }
 
 
@@ -102,7 +103,7 @@ function imageDownloaded(fetchedOBJ)
 		download.image(options)
 		  .then(({ filename, image }) => {
 		    console.log('File saved to', filename);
-		    response.write('File downloaded to Server in DIR: '+filename+"<br>");
+		    response.write('**File downloaded to Server in DIR: '+filename+"<br>");
 		    promiseCounter++;
 		    if (promiseCounter == 15) {
 		    	afterDownloading();
@@ -118,9 +119,9 @@ function imageDownloaded(fetchedOBJ)
 function afterDownloading()
 {
 	serverURL = request.protocol + '://' + request.get('host') ;
-	var hrefString = "<br><a href='"+serverURL+"/displayKeywords/'>Click here</a> to see all the keywords"+
+	var hrefString = "<br><a href='"+serverURL+"/displayKeywords/' style='color:red'>Click here</a> to see all the keywords"+
 					"  Entered yet!<br>";
-	response.end("Downloading Completed"+hrefString, endResponse);
+	response.end("Downloading Completed"+hrefString+"</div>", endResponse);
 	console.log("Downloading Completed!");
 
 	mongo.insert(fileDetail);
