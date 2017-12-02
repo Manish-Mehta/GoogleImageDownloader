@@ -24,11 +24,13 @@ router.get('/', function (req, res) {
   response = res;
   responseEnded = false;
   request = req;
+  searchKeyword = req.query.searchInput;
+  
   response.writeHead(200, {'Content-Type' : 'text/html' });
   response.write("<link rel='stylesheet' type='text/css' href='../css/style.css'><div class='container'>"+
-  			"<br>your search request for '+searchKeyword+ ' is processing please wait.....<br>");
+  			"<br>your search request for "+searchKeyword+ " is processing please wait.....<br>");
 
-  searchKeyword = req.query.searchInput;
+  
   console.log("search request made for "+searchKeyword);
   
   
