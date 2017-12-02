@@ -14,7 +14,7 @@ router.get('/', function(req,res){
     function extractData(docs)
     {
     	console.log("keywords fetched: "+docs);
-    	var htmlOP = "<link rel='stylesheet' type='text/css' href='../css/style.css'><div class='keywordDisplayBlock'>";
+    	var htmlOP = "<link rel='stylesheet' type='text/css' href='../css/style.css'><div class='keywordDisplayBlock'><h4>keywords Searched</h4>";
         var serverURL = req.protocol + '://' + req.get('host') ;
     	docs.forEach(function(element)
 		{

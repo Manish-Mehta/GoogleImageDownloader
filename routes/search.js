@@ -14,7 +14,7 @@ var response;
 var request;
 var fileDetail = [];
 var serverURL;
-
+let responseEnded;
 
 
 //search Page
@@ -23,29 +23,32 @@ router.get('/', function (req, res) {
   promiseCounter = 0;
   counter = 0;
   response = res;
+  responseEnded = false;
   request = req;
   response.writeHead(200, {'Content-Type' : 'text/html' });
 
   searchKeyword = req.query.searchInput;
   console.log("search request made for "+searchKeyword);
   
-  if(timer)
-  	{
-  		function delayFn(arg) {
-  			response.write(arg);
-  		}
-  		function delayFn2(arg) {
-  			response.write(arg);
-  		}
+  
+function delayFn(arg) {
+	if(!responseEnded)
+		response.write(arg);
+}
+function delayFn2(arg) {
+	if(!responseEnded)
+		response.write(arg);
+}
 
-  		function delayFn3(arg) {
-  			response.write(arg);
-  		}
+function delayFn3(arg) {
+	if(!responseEnded)
+		response.write(arg);
+}
 
-  		setTimeout(delayFn, 10000, 'your search request for '+searchKeyword+ ' is processing please wait.....<br>');
-  		setTimeout(delayFn2, 50000, '<br> this may take a while	');
-  		setTimeout(delayFn3, 103000, '<br> waiting for image information');
-  	}
+setTimeout(delayFn, 10000, 'your search request for '+searchKeyword+ ' is processing please wait.....<br>');
+setTimeout(delayFn2, 50000, '<br> this may take a while	<br>');
+setTimeout(delayFn3, 103000, '<br> waiting for image information<br>');
+	
 
   
   //image scrapping
@@ -71,7 +74,7 @@ router.get('/', function (req, res) {
 function onRejected()
 {
 	console.log('promise rejected: images did not scrapped');
-	response.end("error occurred while scrapping");
+	response.end("error occurred while scrapping", endResponse);
 }
 
 
@@ -117,11 +120,16 @@ function afterDownloading()
 	serverURL = request.protocol + '://' + request.get('host') ;
 	var hrefString = "<br><a href='"+serverURL+"/displayKeywords/'>Click here</a> to see all the keywords"+
 					"  Entered yet!<br>";
-	response.end("Downloading Completed"+hrefString);
+	response.end("Downloading Completed"+hrefString, endResponse);
 	console.log("Downloading Completed!");
 
 	mongo.insert(fileDetail);
 	
+}
+
+function endResponse()
+{
+	responseEnded=true;
 }
 
 
