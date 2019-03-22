@@ -1,63 +1,52 @@
 
 const MongoClient = require('../node_modules/mongodb').MongoClient;
-var dbName = 'googleimages';
-var collectionName = 'imageDetails';
 
-var url = "mongodb://admin:admin@ds123926.mlab.com:23926/"+dbName;
+var userName = process.env.DB_USER;
+var password = process.env.DB_PASSWORD;
+var dbName = process.env.DB_NAME || 'googleimages';
+var collectionName = process.env.IMAGE_COLLECTION || 'imageDetails';
+var dbHost = process.env.DB_HOST;
+var dbPort = process.env.DB_PORT;
 
+var url = `mongodb://${userName}:${password}@${dbHost}:${dbPort}/${dbName}`;
+var db_connection;
+
+MongoClient.connect(url, (err, db) => {
+  if (err) {
+    throw err;
+  }
+  db_connection = db;
+  console.log('DB Connected successfully')
+});
 
 module.exports = {
-    insert: function(data){
-    	console.log('inserting Data')
-    	        
-    	MongoClient.connect(url, function(err, db) {
-        	if (err)
-          		throw err;
+  insert: function (data) {
+    console.log('inserting Data');
+    db_connection.collection(collectionName).insert(data, (err, res) => {
+      if (err) {
+        throw err;
+      }
+      console.log('data Insterted');
+    });
+  },
 
-          db.collection(collectionName).insert(data, (err, res)=>{
-          	if (err) throw err;
-          	console.log('data Insterted');
-    		db.close();
-    	    });
-           
-        });
-    }, 
+  fetchDistinct: function (distinctField, extractDataCallback) {
+    db_connection.collection(collectionName).distinct(distinctField, function (err, docs) {
+      console.log('fetching Data');
+      if (err) {
+        throw err;
+      }
+      extractDataCallback(docs);
+    });
+  },
 
-    fetchDistinct: function(distinctField,extractDataCallback){
-		
-		MongoClient.connect(url, function(err, db) {
-        	if (err)
-          		throw err;
-
-	    	db.collection(collectionName).distinct(distinctField, function(err, docs) {
-  				console.log('fetching Data');
-  				if (err)
-          		throw err;
-				db.close();
-				extractDataCallback(docs);
-			  
-    	    });
-           
-        });
-     
-    },
-
-    fetch: function(queryObj,coloumnObj,extractDataCallback){
-
-    	MongoClient.connect(url, function(err, db) {
-    		if (err)
-    			throw err;
-
-    		db.collection(collectionName).find(queryObj, coloumnObj).toArray(function(err, result) {
-   		 		console.log('fetching data');
-   		 		if (err) throw err;
-    			db.close();
-    			extractDataCallback(result);
- 			});
-
-
-
-    	});
-
-    }
-}      
+  fetch: function (queryObj, coloumnObj, extractDataCallback) {
+    db_connection.collection(collectionName).find(queryObj, coloumnObj).toArray(function (err, result) {
+      console.log('fetching data');
+      if (err) {
+        throw err;
+      }
+      extractDataCallback(result);
+    });
+  }
+}

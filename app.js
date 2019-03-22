@@ -1,24 +1,23 @@
-//npm install imagemin --save
+
+require('dotenv').config();	//loading environment variables
 
 const express = require('express');
 const path = require('path');
-const mongoModule = require('./LIB/mongoModule');
+const logger = require('morgan');
 
-var search = require('./routes/search');
-var displayKeywords = require('./routes/displayKeywords');
-var displayImages = require('./routes/displayImages');
+const search = require('./routes/search');
+const displayKeywords = require('./routes/displayKeywords');
+const displayImages = require('./routes/displayImages');
 
+const app = express();
+app.set('port', (process.env.PORT || 3000));
 
-let app = express();
-
-
-
-app.set('views',path.join(__dirname,'views'));	
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.use(logger('combined'));
 
-// HOME Route
-app.get('/', (req, res) => 
-{
+// Home Route
+app.get('/', (req, res) => {
 	res.render('search');
 });
 
@@ -36,9 +35,7 @@ app.use('/displayKeywords', displayKeywords);
 //displayImages route
 app.use('/displayImages', displayImages);
 
-
 //Server Starting Point
-app.listen(3000, () =>
-{
-	console.log('Server started at 3000.....');
+app.listen(app.get('port'), () => {
+	console.log('Server started at ', app.get('port'));
 });
